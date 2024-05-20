@@ -25,10 +25,10 @@ namespace Advanced_TaskManager.Class
                 Console.WriteLine("Bienvenido al sistema de administración de tareas");
                 Console.WriteLine("¿Qué deseas hacer hoy?");
                 Console.WriteLine("--------------------------------------------------------------------\n" +
-                                  "1. Registrarse \n" +
-                                  "2. Iniciar Sesion\n" +
-                                  "3. Salir\n" +
-                                  "--------------------------------------------------------------------");
+                    "1. Registrarse \n" +
+                    "2. Iniciar Sesion\n" +
+                    "3. Salir\n" +
+                    "--------------------------------------------------------------------");
                 _menuOption = int.Parse(Console.ReadLine());
 
                 switch (_menuOption)
@@ -36,6 +36,7 @@ namespace Advanced_TaskManager.Class
                     case 1:
                         registroUsers.Register();
                         break;
+
                     case 2:
                         if (registroUsers.Login())
                         {
@@ -53,36 +54,36 @@ namespace Advanced_TaskManager.Class
         }
 
         private void ShowTaskMenu()
-        {
+                        {
             while (true)
             {
-                Console.WriteLine("Select an action:");
-                Console.WriteLine("1. Add Task");
-                Console.WriteLine("2. Edit Task");
-                Console.WriteLine("3. List Tasks");
-                Console.WriteLine("4. Exit");
-                Console.Write("Enter your choice: ");
+                            Console.WriteLine("Select an action:");
+                            Console.WriteLine("1. Add Task");
+                            Console.WriteLine("2. Edit Task");
+                            Console.WriteLine("3. List Tasks");
+                            Console.WriteLine("4. Exit");
+                            Console.Write("Enter your choice: ");
 
-                string choice = Console.ReadLine();
+                            string choice = Console.ReadLine();
 
-                switch (choice)
-                {
-                    case "1":
+                                switch (choice)
+                                {
+                                    case "1":
                         AddTask();
-                        break;
-                    case "2":
+                                        break;
+                                    case "2":
                         EditTask();
-                        break;
-                    case "3":
+                                        break;
+                                    case "3":
                         _taskManager.ListTasks();
-                        break;
+                                        break;
                     case "4":
                         return;
-                    default:
-                        Console.WriteLine("Invalid choice. Please try again.");
-                        break;
-                }
-            }
+                                    default:
+                                        Console.WriteLine("Invalid choice. Please try again.");
+                                        break;
+                                }
+                            }
         }
 
         private void AddTask()
@@ -103,7 +104,7 @@ namespace Advanced_TaskManager.Class
 
             var task = new Task(taskID, taskName, taskDescription, taskStartDate, taskEndDate, taskStatus, taskPriority);
             _taskManager.AddTask(task);
-        }
+                }
 
         private void EditTask()
         {

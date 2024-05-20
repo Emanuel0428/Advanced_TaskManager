@@ -8,22 +8,31 @@ namespace Advanced_TaskManager.Class
 {
     internal class TaskManager
     {
-        private readonly List<Task> taskList;
 
+        // Event declarations
         public event EventHandler<TaskEventArgs> TaskAdded;
         public event EventHandler<TaskEventArgs> TaskEdited;
 
-        public TaskManager()
         {
-            taskList = new List<Task>();
         }
-
-        public void AddTask(Task task)
+        public void Guardar_datos()
         {
-            taskList.Add(task);
+            base_datos.Add(Registro_u());
+        }
+        public void Asignar_llaves()
+        {
+            contador_regis++;
+
+        {
             OnTaskAdded(task);
         }
 
+        public void Delete_Task()
+        {
+            Console.WriteLine();
+        }
+
+        // En la clase TaskManager
         public void EditTaskByID(int taskID, string taskName, string taskDescription, DateTime taskStartDate, DateTime taskEndDate, string taskStatus, string taskPriority)
         {
             Task taskToUpdate = taskList.FirstOrDefault(t => t.TaskID == taskID);
@@ -43,8 +52,8 @@ namespace Advanced_TaskManager.Class
             }
         }
 
-        public void ListTasks()
         {
+            Console.WriteLine(lista_datos[].)
             foreach (Task task in taskList)
             {
                 List<string> taskInfo = task.TaskToList();
@@ -58,7 +67,32 @@ namespace Advanced_TaskManager.Class
                 Console.WriteLine();
             }
         }
+        public void EditTask()
+        {
+            try
+            {
+                Console.Write("Enter Task ID to Edit: ");
+                int taskID = int.Parse(Console.ReadLine());
 
+                Console.WriteLine("Enter New Task Details:");
+                Console.Write("Task Name: ");
+                string taskName = Console.ReadLine();
+                Console.Write("Task Description: ");
+                string taskDescription = Console.ReadLine();
+                DateTime taskStartDate = DateTime.Now;
+                DateTime taskEndDate = DateTime.Now;
+                Console.Write("Task Status: ");
+                string taskStatus = Console.ReadLine();
+                Console.Write("Task Priority: ");
+                string taskPriority = Console.ReadLine();
+
+                EditTaskByID(taskID, taskName, taskDescription, taskStartDate, taskEndDate, taskStatus, taskPriority);
+            }
+            catch (FormatException)
+            {
+                Console.WriteLine("Invalid input format. Please enter a valid integer for Task ID.");
+            }
+        }
         protected virtual void OnTaskAdded(Task task)
         {
             TaskAdded?.Invoke(this, new TaskEventArgs(task));
@@ -70,6 +104,7 @@ namespace Advanced_TaskManager.Class
         }
     }
 
+    // Event argument class for task events
     class TaskEventArgs : EventArgs
     {
         public Task Task { get; }
