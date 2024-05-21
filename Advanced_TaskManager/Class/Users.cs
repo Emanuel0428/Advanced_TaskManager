@@ -10,11 +10,13 @@ namespace Advanced_TaskManager.Class
     {
         public string Username { get; }
         private string Password { get; }
+        public List<Task> TaskList { get; }
 
         public User(string username, string password)
         {
             Username = username;
             Password = password;
+            TaskList = new List<Task>();
         }
 
         public bool VerifyPassword(string password)
@@ -23,4 +25,3 @@ namespace Advanced_TaskManager.Class
         }
     }
 }
-

@@ -1,18 +1,12 @@
-﻿using Advanced_TaskManager.Class;
-using Microsoft.Win32;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics.Contracts;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using static System.Runtime.InteropServices.JavaScript.JSType;
-
 
 namespace Advanced_TaskManager.Class
 {
     internal class RegistroUsers
     {
+        // Declaración de eventos
         public event EventHandler<string> MaxAttemptsReached;
         public event EventHandler<string> UserLoggedIn;
         public event EventHandler<string> UserRegistered;
@@ -64,14 +58,16 @@ namespace Advanced_TaskManager.Class
 
             var newUser = new User(username, password);
             _database.Add(newUser);
-            UserRegistered?.Invoke(this, string.Empty);
+            UserRegistered?.Invoke(this, $"Usuario {username} registrado exitosamente.");
             return newUser;
         }
 
-        public bool Login()
+        public bool Login(out User loggedInUser)
         {
             string username;
             string password;
+
+            loggedInUser = null;
 
             while (true)
             {
@@ -93,7 +89,8 @@ namespace Advanced_TaskManager.Class
 
                 if (IsPasswordValid(username, password))
                 {
-                    UserLoggedIn?.Invoke(this, string.Empty);
+                    loggedInUser = _database.First(u => u.Username == username);
+                    UserLoggedIn?.Invoke(this, $"Usuario {username} inició sesión exitosamente.");
                     return true;
                 }
 
@@ -102,7 +99,7 @@ namespace Advanced_TaskManager.Class
 
                 if (_loginAttempts > 3)
                 {
-                    MaxAttemptsReached?.Invoke(this, string.Empty);
+                    MaxAttemptsReached?.Invoke(this, "Número máximo de intentos alcanzado.");
                     Console.WriteLine("Número máximo de intentos alcanzado. Saliendo del programa.");
                     return false;
                 }
@@ -131,5 +128,3 @@ namespace Advanced_TaskManager.Class
         }
     }
 }
-
-

@@ -16,18 +16,18 @@ namespace Advanced_TaskManager.Class
         public string TaskStatus { get; set; }
         public string TaskPriority { get; set; }
 
-        public Task(int taskID, string taskName, string taskDescription, DateTime taskStartDate, DateTime taskEndDate, string taskStatus, string taskPriority)
+        public Task(int taskID, string taskName, string taskDescription, DateTime taskStartDate, DateTime taskEndDate, string taskPriority)
         {
             TaskID = taskID;
             TaskName = taskName;
             TaskDescription = taskDescription;
             TaskStartDate = taskStartDate;
             TaskEndDate = taskEndDate;
-            TaskStatus = taskStatus;
+            TaskStatus = "Incompleto";  
             TaskPriority = taskPriority;
         }
 
-        public List<string> TaskToList()
+        public virtual List<string> TaskToList()
         {
             return new List<string> {
                 TaskID.ToString(),
@@ -39,5 +39,5 @@ namespace Advanced_TaskManager.Class
                 TaskPriority
             };
         }
-    }   
+    }
 }

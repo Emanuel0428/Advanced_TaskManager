@@ -1,41 +1,24 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Advanced_TaskManager.Class
 {
     internal class TaskManager
     {
-
-        // Event declarations
+        // Declaración de eventos
         public event EventHandler<TaskEventArgs> TaskAdded;
         public event EventHandler<TaskEventArgs> TaskEdited;
 
+        public void AddTask(User user, Task task)
         {
-        }
-        public void Guardar_datos()
-        {
-            base_datos.Add(Registro_u());
-        }
-        public void Asignar_llaves()
-        {
-            contador_regis++;
-
-        {
+            user.TaskList.Add(task);
             OnTaskAdded(task);
         }
 
-        public void Delete_Task()
+        public void EditTaskByID(User user, int taskID, string taskName, string taskDescription, DateTime taskStartDate, DateTime taskEndDate, string taskStatus, string taskPriority)
         {
-            Console.WriteLine();
-        }
-
-        // En la clase TaskManager
-        public void EditTaskByID(int taskID, string taskName, string taskDescription, DateTime taskStartDate, DateTime taskEndDate, string taskStatus, string taskPriority)
-        {
-            Task taskToUpdate = taskList.FirstOrDefault(t => t.TaskID == taskID);
+            Task taskToUpdate = user.TaskList.FirstOrDefault(t => t.TaskID == taskID);
             if (taskToUpdate != null)
             {
                 taskToUpdate.TaskName = taskName;
@@ -48,51 +31,36 @@ namespace Advanced_TaskManager.Class
             }
             else
             {
-                Console.WriteLine("Task not found!");
+                Console.WriteLine("¡Tarea no encontrada!");
             }
         }
 
+        public void ListTasks(User user)
         {
-            Console.WriteLine(lista_datos[].)
-            foreach (Task task in taskList)
+            foreach (Task task in user.TaskList)
             {
                 List<string> taskInfo = task.TaskToList();
-                Console.WriteLine($"Task ID: {taskInfo[0]}");
-                Console.WriteLine($"Task Name: {taskInfo[1]}");
-                Console.WriteLine($"Task Description: {taskInfo[2]}");
-                Console.WriteLine($"Task Start Date: {taskInfo[3]}");
-                Console.WriteLine($"Task End Date: {taskInfo[4]}");
-                Console.WriteLine($"Task Status: {taskInfo[5]}");
-                Console.WriteLine($"Task Priority: {taskInfo[6]}");
+                Console.WriteLine($"ID de Tarea: {taskInfo[0]}");
+                Console.WriteLine($"Nombre de Tarea: {taskInfo[1]}");
+                Console.WriteLine($"Descripción de Tarea: {taskInfo[2]}");
+                Console.WriteLine($"Fecha de Inicio: {taskInfo[3]}");
+                Console.WriteLine($"Fecha de Fin: {taskInfo[4]}");
+                Console.WriteLine($"Estado: {taskInfo[5]}");
+                Console.WriteLine($"Prioridad: {taskInfo[6]}");
+
+                if (task is WorkTask workTask)
+                {
+                    Console.WriteLine($"Nombre del Proyecto: {workTask.ProjectName}");
+                }
+                else if (task is PersonalTask personalTask)
+                {
+                    Console.WriteLine($"Ubicación: {personalTask.Location}");
+                }
+
                 Console.WriteLine();
             }
         }
-        public void EditTask()
-        {
-            try
-            {
-                Console.Write("Enter Task ID to Edit: ");
-                int taskID = int.Parse(Console.ReadLine());
 
-                Console.WriteLine("Enter New Task Details:");
-                Console.Write("Task Name: ");
-                string taskName = Console.ReadLine();
-                Console.Write("Task Description: ");
-                string taskDescription = Console.ReadLine();
-                DateTime taskStartDate = DateTime.Now;
-                DateTime taskEndDate = DateTime.Now;
-                Console.Write("Task Status: ");
-                string taskStatus = Console.ReadLine();
-                Console.Write("Task Priority: ");
-                string taskPriority = Console.ReadLine();
-
-                EditTaskByID(taskID, taskName, taskDescription, taskStartDate, taskEndDate, taskStatus, taskPriority);
-            }
-            catch (FormatException)
-            {
-                Console.WriteLine("Invalid input format. Please enter a valid integer for Task ID.");
-            }
-        }
         protected virtual void OnTaskAdded(Task task)
         {
             TaskAdded?.Invoke(this, new TaskEventArgs(task));
@@ -104,7 +72,7 @@ namespace Advanced_TaskManager.Class
         }
     }
 
-    // Event argument class for task events
+    // Clase de argumentos de evento para eventos de tarea
     class TaskEventArgs : EventArgs
     {
         public Task Task { get; }
