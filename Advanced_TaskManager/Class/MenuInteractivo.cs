@@ -38,9 +38,9 @@ namespace Advanced_TaskManager.Class
                 Console.WriteLine("Bienvenido al sistema de administración de tareas");
                 Console.WriteLine("¿Qué deseas hacer hoy?");
                 Console.WriteLine("--------------------------------------------------------------------\n" +
-                                  "1. Registrarse \n" +
-                                  "2. Iniciar Sesion\n" +
-                                  "3. Salir\n" +
+                                  "                         1. Registrarse \n" +
+                                  "                         2. Iniciar Sesion\n" +
+                                  "                         3. Salir\n" +
                                   "--------------------------------------------------------------------");
                 _menuOption = int.Parse(Console.ReadLine());
 
@@ -87,14 +87,14 @@ namespace Advanced_TaskManager.Class
         {
             while (true)
             {
-                Console.WriteLine("Selecciona una opción:");
-                Console.WriteLine("1. Agregar Tarea de Trabajo");
-                Console.WriteLine("2. Agregar Tarea Personal");
-                Console.WriteLine("3. Editar Tarea");
-                Console.WriteLine("4. Listar Tareas");
-                Console.WriteLine("5. Salir");
-                Console.Write("Ingrese su opción: ");
-
+                Console.WriteLine("----------Selecciona una opción:----------\n" +
+                                  "       1. Agregar Tarea de Trabajo        \n" +
+                                  "       2. Agregar Tarea Personal          \n" +
+                                  "       3. Editar Tarea                    \n" +
+                                  "       4. Listar Tareas                   \n" +
+                                  "       5. Salir                           \n" +
+                                  "         Ingrese su opción:               \n" +
+                                  "------------------------------------------");
                 string choice = Console.ReadLine();
 
                 switch (choice)
