@@ -23,7 +23,7 @@ namespace Advanced_TaskManager.Class
             TaskDescription = taskDescription;
             TaskStartDate = taskStartDate;
             TaskEndDate = taskEndDate;
-            TaskStatus = "Incompleto";  
+            TaskStatus = "Incompleto";  // Estado predeterminado
             TaskPriority = taskPriority;
         }
 

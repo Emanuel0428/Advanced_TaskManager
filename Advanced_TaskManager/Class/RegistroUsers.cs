@@ -111,15 +111,9 @@ namespace Advanced_TaskManager.Class
             return !_database.Any(user => user.Username == username);
         }
 
-        private bool IsValidPassword(string password)
-        {
-            return password.Length >= 8 && password.Any(char.IsSymbol) && password.Any(char.IsDigit);
-        }
+        private static bool IsValidPassword(string password) => password.Length >= 8 && password.Any(char.IsSymbol) && password.Any(char.IsDigit);
 
-        private bool IsUsernameValid(string username)
-        {
-            return _database.Any(user => user.Username == username);
-        }
+        private bool IsUsernameValid(string username) => _database.Any(user => user.Username == username);
 
         private bool IsPasswordValid(string username, string password)
         {
